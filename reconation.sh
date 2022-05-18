@@ -11,11 +11,10 @@ fi
 cd ~/siddharth/recon/$1/$(date +"%d-%m-%Y")
 
 echo -e "\e[1;33m[+] Running certspotter & CRTsh\e[0m"
-curl -s https://certspotter.com/api/v0/certs\?domain\=$1 | jq '.[].dns_names[]' | sed 's/\"//g' | sed 's/\*\.//g' | sort -u | grep $1 >> certspotter.txt
 curl -s https://crt.sh/?q=%25.$1 | grep $1 | grep "<TD>" | cut -d">" -f2 | cut -d"<" -f1 | sort -u | sed s/*.//g >> crtsh.txt
 
 echo -e "\e[1;33m[+] Running Findomain\e[0m"
-findomain-linux -t $1 -u findomain.txt
+findomain -t $1 -u findomain.txt
 
 echo -e "\e[1;33m[+] Running Subfinder\e[0m"
 subfinder -d $1 -o subfinder.txt
@@ -27,14 +26,14 @@ echo -e "\e[1;33m[+] Running Amass\e[0m"
 amass enum -passive -d $1 -o amass.txt
 
 echo -e "\e[1;33m[+] Running ShuffleDNS\e[0m"
-shuffledns -d $1 -massdns /root/massdns/bin/massdns -w /root/massdns/lists/all.txt -r /root/massdns/lists/resolvers.txt -o shuffledns.txt
+shuffledns -d $1 -massdns /home/ubuntu/tools/massdns/bin/massdns -w /home/ubuntu/tools/massdns/lists/all.txt -r /home/ubuntu/tools/massdns/lists/resolvers.txt -o shuffledns.txt
 
 echo -e "\e[1;33m[+] Merging Files\e[0m"
 cat *.txt > all_old.txt
 sort -u all_old.txt > all.txt
 
 echo -e "\e[1;33m[+] Resolving Domains\e[0m"
-shuffledns -d $1 -massdns /root/massdns/bin/massdns -list all.txt -o domains.txt -r /root/massdns/lists/resolvers.txt
+shuffledns -d $1 -massdns /home/ubuntu/tools/massdns/bin/massdns -list all.txt -o domains.txt -r /home/ubuntu/tools/massdns/lists/resolvers.txt
 
 echo -e "\e[1;33m[+] Running HTTPx\e[0m"
 cat domains.txt | httpx -threads 200 -o live_domains.txt
