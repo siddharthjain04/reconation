@@ -81,27 +81,27 @@ golangInstall() {
 : 'Golang tools'
 golangTools() {
 	echo -e "[$GREEN+$RESET] Installing subfinder.."
-	GO111MODULE=on go get -u -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder
+	go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing subjack.."
-	go get github.com/haccer/subjack
+	go install github.com/haccer/subjack@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing aquatone.."
-	go get -u -v github.com/michenriksen/aquatone
+	go install github.com/michenriksen/aquatone@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing httprobe.."
-	go get -u github.com/tomnomnom/httprobe
+	go install github.com/tomnomnom/httprobe@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing assetfinder.."
-	go get -u github.com/tomnomnom/assetfinder
+	go install github.com/tomnomnom/assetfinder@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing gf.."
-	go get -u github.com/tomnomnom/gf
+	go install github.com/tomnomnom/gf@latest
 	echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bashrc
 	cp -r $GOPATH/src/github.com/tomnomnom/gf/examples ~/.gf
 	cd "$HOME"/tools/ || return
@@ -112,7 +112,7 @@ golangTools() {
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing qsreplace.."
-	go get -u github.com/tomnomnom/qsreplace
+	go install github.com/tomnomnom/qsreplace@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing ffuf (Fast web fuzzer).."
@@ -137,7 +137,7 @@ golangTools() {
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing dnsprobe.."
-	GO111MODULE=on go get -v github.com/projectdiscovery/dnsprobe
+	go install github.com/projectdiscovery/dnsprobe@latest
 	echo -e "[$GREEN+$RESET] Done."
 
 	echo -e "[$GREEN+$RESET] Installing nuclei.."
