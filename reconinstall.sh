@@ -22,8 +22,6 @@ RESET="\033[0m"
 		sudo apt-get install -y --reinstall build-essential
 		sudo apt install -y python3-pip
 		sudo apt install -y file
-		sudo apt-get install -y dnsutils
-		sudo apt install -y lua5.1 alsa-utils libpq5
 		sudo apt-get autoremove -y
 		sudo apt clean
 		#echo -e "[$GREEN+$RESET] Stopping Docker service.."
@@ -172,12 +170,14 @@ additionalTools() {
 	if [ -e /usr/local/bin/massdns ]; then
 		echo -e "[$GREEN+$RESET] Already installed."
 	else
-		cd "$HOME"/tools/ || return
+		cd /home/ubuntu/tools/ || return
 		git clone https://github.com/blechschmidt/massdns.git
-		cd "$HOME"/tools/massdns || return
+		cd /home/ubuntu/tools/massdns || return
 		echo -e "[$GREEN+$RESET] Running make command for massdns.."
 		make -j
-		sudo cp "$HOME"/tools/massdns/bin/massdns /usr/local/bin/
+		sudo cp /home/ubuntu/tools/massdns/bin/massdns /usr/local/bin/
+		cd /home/ubuntu/tools/massdns/lists/
+		wget "https://gist.githubusercontent.com/jhaddix/86a06c5dc309d08580a018c66354a056/raw/96f4e51d96b2203f19f6381c8c545b278eaa0837/all.txt"
 		echo -e "[$GREEN+$RESET] Done."
 	fi
 
