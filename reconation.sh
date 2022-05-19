@@ -39,10 +39,10 @@ echo -e "\e[1;33m[+] Running HTTPx\e[0m"
 cat domains.txt | httpx -threads 200 -o live_domains.txt
 
 echo -e "\e[1;33m[+] Running Nuclei\e[0m"
-cat live_domains.txt | nuclei -t /root/nuclei-templates/cves/ -c 50 -o nuclei_cve.txt 
-cat live_domains.txt | nuclei -t /root/nuclei-templates/files/ -c 50 -o nuclei_files.txt
-cat live_domains.txt | nuclei -t /root/nuclei-templates/technologies -c 50 -o nuclei_technologies.txt
-cat live_domains.txt | nuclei -t /root/nuclei-templates/security-misconfiguration -c 50 -o nuclei_security-misconfiguration.txt
+cat live_domains.txt | nuclei -t /home/ubuntu/nuclei-templates/cves/ -c 50 -o nuclei_cve.txt 
+cat live_domains.txt | nuclei -t /home/ubuntu/nuclei-templates/files/ -c 50 -o nuclei_files.txt
+cat live_domains.txt | nuclei -t /home/ubuntu/nuclei-templates/technologies -c 50 -o nuclei_technologies.txt
+cat live_domains.txt | nuclei -t /home/ubuntu/nuclei-templates/security-misconfiguration -c 50 -o nuclei_security-misconfiguration.txt
 
 echo -e "\e[1;33m[+] Running WaybackUrl | GAU | Hakrawler\e[0m" 
 cat live_domains.txt | waybackurls | tee tmp-url.txt
